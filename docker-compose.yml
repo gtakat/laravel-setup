@@ -1,0 +1,19 @@
+version: '3.7'
+services:
+  nginx:
+    build:
+      context: .
+      dockerfile: ./docker/nginx/Dockerfile
+    ports:
+      - "18001:80"
+    depends_on:
+      - webapp
+  webapp:
+    tty: true
+    stdin_open: true
+    build:
+      context: .
+      dockerfile: ./docker/php-laravel/Dockerfile
+    volumes:
+      - ./webapp:/webapp
+
